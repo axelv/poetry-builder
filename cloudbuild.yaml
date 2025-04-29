@@ -4,8 +4,15 @@ steps:
       [
         "build",
         "-t",
-        "europe-west1-docker.pkg.dev/$PROJECT_ID/cicd-images/poetry-builder:$_POETRY_VERSION",
+        "europe-west1-docker.pkg.dev/$PROJECT_ID/cicd-images/poetry-builder:python-$_PYTHON_VERSION-poetry-$_POETRY_VERSION",
+        "--build-arg",
+        "PYTHON_VERSION=$_PYTHON_VERSION",
+        "--build-arg",
+        "POETRY_VERSION=$_POETRY_VERSION",
         ".",
       ]
 images:
-  - "europe-west1-docker.pkg.dev/$PROJECT_ID/cicd-images/poetry-builder:$_POETRY_VERSION"
+  - "europe-west1-docker.pkg.dev/$PROJECT_ID/cicd-images/poetry-builder:python-$_PYTHON_VERSION-poetry-$_POETRY_VERSION"
+substitutions:
+  _PYTHON_VERSION: "3.13"
+  _POETRY_VERSION: "1.8.5"
